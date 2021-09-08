@@ -1,4 +1,4 @@
-import { takeLatest, call } from "redux-saga/effects";
+import { takeLatest, call, put } from "redux-saga/effects";
 import * as api from "../../apis";
 import * as actions from "../actions";
 
@@ -8,6 +8,7 @@ function* fetchPostSaga(action) {
 		"🚀 ~ file: index.js ~ line 7 ~ function*fetchPostSaga ~ posts",
 		posts
 	);
+	yield put(actions.getPosts.getPostsSuccess(posts));
 }
 
 function* mySaga() {
