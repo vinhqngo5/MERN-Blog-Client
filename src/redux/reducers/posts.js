@@ -1,6 +1,6 @@
 import { INIT_STATE } from "../../constants";
 import { getPosts, getType } from "../actions";
-export default function postsReducer(state = INIT_STATE, action) {
+export default function postsReducer(state = INIT_STATE.posts, action) {
 	switch (action.type) {
 		case getType(getPosts.getPostsRequest): //case: "getPostsRequest"
 			return {

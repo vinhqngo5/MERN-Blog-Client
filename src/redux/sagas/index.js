@@ -8,7 +8,7 @@ function* fetchPostSaga(action) {
 		"🚀 ~ file: index.js ~ line 7 ~ function*fetchPostSaga ~ posts",
 		posts
 	);
-	yield put(actions.getPosts.getPostsSuccess(posts));
+	yield put(actions.getPosts.getPostsSuccess(posts.data));
 }
 
 function* mySaga() {
