@@ -17,16 +17,8 @@ function* fetchPostsSaga(action) {
 }
 
 function* createPostSaga(action) {
-	console.log(
-		"🚀 ~ file: index.js ~ line 20 ~ function*createPostSaga ~ action",
-		action
-	);
 	try {
 		const post = yield call(api.createPost, action.payload);
-		console.log(
-			"🚀 ~ file: index.js ~ line 22 ~ function*createPostSaga ~ post",
-			post
-		);
 		yield put(actions.createPost.createPostSuccess(post.data));
 		yield put(actions.hideModal());
 	} catch (err) {
@@ -35,9 +27,21 @@ function* createPostSaga(action) {
 	}
 }
 
+function* updatePostSaga(action) {
+	try {
+		const updatedPost = yield call(api.updatePost, action.payload);
+		yield put(actions.updatePost.updatePostSuccess(updatedPost.data));
+		yield put(actions.hideModal());
+	} catch (err) {
+		console.error(err);
+		yield put(actions.updatePost.updatePostFailure(err));
+	}
+}
+
 function* mySaga() {
 	yield takeLatest(actions.getPosts.getPostsRequest, fetchPostsSaga);
 	yield takeLatest(actions.createPost.createPostRequest, createPostSaga);
+	yield takeLatest(actions.updatePost.updatePostRequest, updatePostSaga);
 }
 // generator function es6
 export default mySaga;

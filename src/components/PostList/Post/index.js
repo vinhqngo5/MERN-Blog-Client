@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import {
 	Card,
 	Avatar,
@@ -14,8 +15,16 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import moment from "moment";
 import useStyles from "./style";
+import { updatePost } from "../../../redux/actions";
 export default function Post({ post }) {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const onLikeButtonClick = useCallback(() => {
+		dispatch(
+			updatePost.updatePostRequest({ ...post, likeCount: post.likeCount + 1 })
+		);
+	}, [dispatch, post]);
+
 	return (
 		<Card>
 			<CardHeader
@@ -43,7 +52,7 @@ export default function Post({ post }) {
 			</CardContent>
 			<CardActions>
 				<IconButton>
-					<FavoriteIcon />
+					<FavoriteIcon onClick={onLikeButtonClick} />
 					<Typography component="span" color="textSecondary">
 						{post.likeCount}
 					</Typography>
